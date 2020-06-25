@@ -1,7 +1,4 @@
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>
-#include <pcl/point_types.h>
-#include <pcl/point_cloud.h>
+#pragma once
 
 namespace iarc2020::depth_processing {
 
@@ -19,16 +16,17 @@ class depthProcessor {
     public:
         depthProcessor();
         ~depthProcessor();
-        void rgbdToPointCloud(); // depth_image_proc already provudes necessary conversion
+        //void rgbdToPointCloud(); 
+        // depth_image_proc already provudes necessary conversion
         // function to convert point_cloud to pcl::pointcloud
 
 
     private:
-        cv::Mat depth_img_;
-        cv::Mat colout_img_;
-        intrinsicParam camera_params_;
-        pcl::PointCloud<pcl::PointXYZ> point_cloud_;
+        // cv::Mat depth_img_;
+        // cv::Mat colour_img_;
+        // intrinsicParam camera_params_;
+        // pcl::PointCloud<pcl::PointXYZ> point_cloud_;
         
 };
 
-}
+} //namespace iarc2020::depth_processing

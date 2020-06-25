@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <arg name="mav_name" default="firefly"/>
+
+    <include file="$(find iarc_simulation_tools)/launch/default.launch" />
+
+    <node pkg="nodelet" type="nodelet" name="standalone_nodelet" args="manager" />
+
+    <node pkg="nodelet" type="nodelet" name="convert_metric" args="load depth_image_proc/convert_metric standalone_nodelet" >
+        <!-- remap input/subscribed topics -->
+        <remap from="image_raw" to="firefly/camera_depth/depth/image_raw" />
+
+        <!-- remap output/published topics -->
+        <remap from="image" to="/firefly/camera_depth/depth/image_raw_out" />
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="point_cloud_xyz" args="load depth_image_proc/point_cloud_xyz standalone_nodelet" >
+        <!-- remap input/subcscribed topics  -->
+        <remap from="image_rect" to="/firefly/camera_depth/depth/image_raw_out" />
+        <remap from="camera_info" to="/firefly/camera_depth/camera_info" />
+
+        <!-- remap output/published topics -->
+        <remap from="points" to="/firefly/camera_depth/point_cloud_xyz" />
+    </node>
+</launch>

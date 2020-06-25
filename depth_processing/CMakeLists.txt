@@ -12,3 +12,8 @@ include_directories(${PCL_LIBRARY_DIRS})
 
 add_definitions(-std=c++17)
 set(CMAKE_BUILD_TYPE Release)
+
+cs_add_library(depth_porcessing_lib src/depth_processing.cpp)
+
+cs_install()
+cs_export()
